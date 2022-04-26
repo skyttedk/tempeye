@@ -1,0 +1,14 @@
+{
+  "name": "tiny.erp",
+  "short_name": "tiny.erp",
+  "lang": "da-DK",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "red",
+  "icons": [{
+    "src": "img/icon512.png",
+    "type": "image/png",
+    "sizes": "512x512"
+  }]
+}
