@@ -4,6 +4,9 @@
 <!-- references 
 
     TO PUSH: git push heroku master
+    ABKY
+    API KEY xyojOQ.rayVcQ:S0AJDREybgNnOC3kzGJLKxzZo6DBgoCU_6WMhhjRtjk
+
     
     gauge component
     https://github.com/Mictronics/GaugeMeter
@@ -36,6 +39,7 @@
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/GaugeMeter.js"></script>
+    <script src="https://cdn.ably.com/lib/ably.min-1.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/GaugeMeter.css">
 
@@ -49,6 +53,16 @@
 
 
     <script>
+        //Ably setup
+
+        const ably = new Ably.Realtime('xyojOQ.rayVcQ:S0AJDREybgNnOC3kzGJLKxzZo6DBgoCU_6WMhhjRtjk');
+        ably.connection.on('connected', () => {
+            alert('Connected to Ably!');
+        });
+
+
+
+
         $(document).ready(function() {
             $(".GaugeMeter").gaugeMeter({
                 percent: 15
