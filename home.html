@@ -62,8 +62,8 @@
 
             const channel = ably.channels.get('tempeye');
 
-            channel.subscribe('clientId_1', (message) => {
-                alert(`Received a greeting message in realtime: ${message.data}`);
+            channel.subscribe('eye1', (message) => {
+                console.log(`Received a greeting message in realtime: ${message.data}`);
             });
 
         });
@@ -79,7 +79,6 @@
 
         setInterval(function() {
             let val = Math.floor(Math.random() * 100);
-            console.log(val);
             $(".GaugeMeter").gaugeMeter({
                 percent: val
             });
