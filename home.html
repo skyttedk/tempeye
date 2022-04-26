@@ -63,7 +63,12 @@
             const channel = ably.channels.get('tempeye');
 
             channel.subscribe('eye1', (message) => {
+
                 console.log(`Received a greeting message in realtime: ${message.data}`);
+
+                $(".GaugeMeter").gaugeMeter({
+                    percent: message.data
+                });
             });
 
         });
@@ -72,17 +77,10 @@
 
 
         $(document).ready(function() {
-            $(".GaugeMeter").gaugeMeter({
-                percent: 15
-            });
+            //$(".GaugeMeter").gaugeMeter({
+            //    percent: 15
+            //});
         });
-
-        setInterval(function() {
-            let val = Math.floor(Math.random() * 100);
-            $(".GaugeMeter").gaugeMeter({
-                percent: val
-            });
-        }, 2000);
     </script>
 
 </head>
