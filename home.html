@@ -31,7 +31,7 @@
 
 <head>
 
-    <title>tiny.erp</title>
+    <title>tempeye</title>
     <meta name="description" content="A tiny but potent erp system">
     <meta name="keywords" content="erp,tiny">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,7 +57,15 @@
 
         const ably = new Ably.Realtime('xyojOQ.rayVcQ:S0AJDREybgNnOC3kzGJLKxzZo6DBgoCU_6WMhhjRtjk');
         ably.connection.on('connected', () => {
-            alert('Connected to Ably!');
+            console.log("Ably connected");
+
+
+            const channel = ably.channels.get('tempeye');
+
+            channel.subscribe('clientId_1', (message) => {
+                alert(`Received a greeting message in realtime: ${message.data}`);
+            });
+
         });
 
 
