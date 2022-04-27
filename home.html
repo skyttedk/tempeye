@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html>
 
+
+<!-- TODO:
+      hydrometer, hund i midten
+      vise tidsstempel på måling
+      hvis måling er meren end xx min gammel. skal der vises -- i metrene
+      implementer temperatuer skalaer som jeg fandt
+
+      paring af devices
+         kunne vi skanne en qr kode for at få en device id?
+         skal kunne slette device
+         skal kune vise flere devices... in the future...
+
+      setup menu...
+        opsætnings menu, hvor man ændre infstillinger
+          tilføje device
+          slette devies
+          angive hundetype pr. device
+          
+
+    unersøg:
+
+      kan en pwa vibrere ?? eller lave lyd ??
+      skal vi have en sms hvis der er for varms.
+
+
+-->
 <!-- references 
 
     TO PUSH: git push heroku master
@@ -54,20 +80,25 @@
 
     <script>
         //Ably setup
+        const channelId = 'f1e82afb-f24e-46ae-af7d-14b70afe4e8c';
+        const APIKEY = 'xyojOQ.rayVcQ:S0AJDREybgNnOC3kzGJLKxzZo6DBgoCU_6WMhhjRtjk';
+        const deviceId = 'ddd307a5-4bea-4545-af8e-3c685d5396e6';
 
-        const ably = new Ably.Realtime('xyojOQ.rayVcQ:S0AJDREybgNnOC3kzGJLKxzZo6DBgoCU_6WMhhjRtjk');
+
+
+        const ably = new Ably.Realtime(APIKEY);
         ably.connection.on('connected', () => {
             console.log("Ably connected");
 
 
-            const channel = ably.channels.get('tempeye');
+            const channel = ably.channels.get(channelId);
 
-            channel.subscribe('eye1', (message) => {
+            channel.subscribe(deviceId, (message) => {
 
-                console.log(`Received a greeting message in realtime: ${message.data}`);
+                console.log(`Received a greeting message in realtime: ${JSON.stringify(message.data)}`);
 
                 $(".GaugeMeter").gaugeMeter({
-                    percent: message.data
+                    percent: message.data.temperature,
                 });
             });
 
