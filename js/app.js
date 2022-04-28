@@ -9,21 +9,26 @@ function renderApp() {
 
 function renderComponents(elements) {
   for (element of elements) {
-
     element.id = generateShortGuid()
+    let attributes = namedNodemapToObject(element.attributes);
     let template = "components/" + element.getAttribute("data-component") + ".mustache"
-      //let dataObjectName = element.getAttribute("data-source")
-      //let dataObj = window[dataObjectName];
-    renderComponent(template, element)
+    renderComponent(template, element, attributes)
   }
 }
 
-async function renderComponent(path, target) {
+
+async function renderComponent(path, target, attributes) {
 
   try {
     let template = await fetch(path)
     let templateString = await template.text()
-    let rendered = Mustache.render(templateString, dataStore);
+    let dataStoreCopy = JSON.parse(JSON.stringify(dataStore))
+      //merge dataSToreCopy and attributes
+    for (let key in attributes) {
+      dataStoreCopy[key] = attributes[key]
+    }
+
+    let rendered = Mustache.render(templateString, dataStoreCopy);
     $(target).html(rendered)
 
     // check if we have nested components!!
@@ -44,6 +49,14 @@ async function renderComponent(path, target) {
   }
 
 
+}
+
+function namedNodemapToObject(nodemap) {
+  let obj = {}
+  for (let node of nodemap) {
+    obj[node.nodeName] = node.nodeValue
+  }
+  return obj
 }
 
 
@@ -138,41 +151,13 @@ function scanDevice() {
   });
 }
 
-//Local storage
-//TODO:
-
-// device categorty: animal
-// devices.type : hun
-// devices.name : bil_1
-
-/**
-  user : {
-    phone: "",
-  } ,
-  devices : {
-    [{
-        id: "",
-        profile : //profiler loades måske fra en server (REST API)
-        category: "",
-        type : "",
-        alarms : [],
-    }]
-  }
-  
-  en profil skal definere
-    min temperatur
-    max temperatur  osv...
-     
- */
-
 
 function loadPage(page) {
-
   dataStore.page = page;
   saveConfiguration();
   location.reload();
 }
-localStorage.removeItem("dataStore")
+//localStorage.removeItem("dataStore")
 
 function loadConfiguration() {
   dataStore = JSON.parse(localStorage.getItem("dataStore"))
