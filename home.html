@@ -43,9 +43,6 @@
     https://pngtree.com/freepng/dog-care-silhouette-head-healthy-pet-mono-line-logo-design_4996067.html
 
 
-    //QR
-    https://blog.minhazav.dev/research/html5-qrcode.html
-    https://github.com/mebjas/html5-qrcode
 
 -->
 
@@ -61,6 +58,7 @@
     <script type="text/javascript" src="js/html5-qrcode.min.js"></script>
     <script type="text/javascript" src="/js/GaugeMeter.js"></script>
     <script src="https://cdn.ably.com/lib/ably.min-1.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/GaugeMeter.css">
 
@@ -118,47 +116,6 @@
         });
 
 
-        // This method will trigger user permissions
-        Html5Qrcode.getCameras().then(devices => {
-            /**
-             * devices would be an array of objects of type:
-             * { id: "id", label: "label" }
-             */
-            //loop devices
-
-
-
-            for (const device of devices) {
-                //if device is not the default camera
-                alert(device.label);
-                //if (device.label != "Built-in camera") {
-                //set the device as the default camera
-                //  Html5Qrcode.setActiveCamera(device.id);
-                //}
-            }
-
-            console.log(devices)
-            if (devices && devices.length) {
-                var cameraId = devices[0].id;
-                // .. use this to start scanning.
-            }
-        }).catch(err => {
-            // handle err
-        });
-
-        function scanQr() {
-            var html5QrcodeScanner = new Html5QrcodeScanner("reader", {
-                fps: 10,
-                qrbox: 250
-            });
-            html5QrcodeScanner.render(onScanSuccess);
-        }
-
-        function onScanSuccess(decodedText, decodedResult) {
-            // Handle on success condition with the decoded text or result.
-            console.log(`Scan result: ${decodedText}`, decodedResult);
-        }
-
 
         //Setup
         $(document).ready(function() {
@@ -177,13 +134,16 @@
 
 <div style="color: RGBa(200, 200, 240, .8)" id="timeStamp"></div>
 
+<!-- Temporarily disabled
 <div class="GaugeMeter" id="gmTemperature" data-width="10" data-size="200" data-append="&#176;" data-label_color="#FFFFFF" data-label="Temperature" data-theme="Green-Red" data-style="Semi" data-back="RGBa(0,0,0,.6)"></div>
+
+
 <img src="/img/dog2.png" style="width: 200px; height: 200px;">
 
-<!--  Layout: 3 rows. 1 meter at top, image in middle and 1 meter at bottom. -->
+
 
 <div class="GaugeMeter" id="gmHumidity" data-width="10" data-size="200" data-append="&#176;" data-label_color="#FFFFFF" data-label="Humidity" data-theme="Green-Red" data-style="Semi" data-back="RGBa(0,0,0,.6)"></div>
-
+-->
 
 
 
