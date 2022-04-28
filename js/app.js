@@ -1,9 +1,9 @@
-let config = null;
-//create a monolithic datastore
 let dataStore = null
+let ably = null
 
 function renderApp() {
   loadConfiguration();
+  setupAbly();
   renderComponents(Array.from($("[data-component]")))
 }
 
@@ -18,26 +18,74 @@ function renderComponents(elements) {
   }
 }
 
-function renderComponent(path, target) {
-  fetch(path)
-    .then((response) => response.text())
-    .then((template) => {
-      var rendered = Mustache.render(template, dataStore);
-      $(target).html(rendered)
+async function renderComponent(path, target) {
 
-      // check if we have nested components!!
-      let elements = $(`#${target.id} [data-component]`)
-      elements = Array.from(elements)
+  try {
+    let template = await fetch(path)
+    let templateString = await template.text()
+    let rendered = Mustache.render(templateString, dataStore);
+    $(target).html(rendered)
 
-      let componentName = path.split("/")[1].split(".")[0]
+    // check if we have nested components!!
+    let elements = $(`#${target.id} [data-component]`)
+    elements = Array.from(elements)
 
-      componentsFiltered = elements.filter(function(element) {
-        return element.getAttribute("data-component") != componentName
-      })
-      if (componentsFiltered.length > 0) {
-        renderComponents(componentsFiltered)
-      }
+    let componentName = path.split("/")[1].split(".")[0]
+
+    componentsFiltered = elements.filter(function(element) {
+      return element.getAttribute("data-component") != componentName
+    })
+    if (componentsFiltered.length > 0) {
+      renderComponents(componentsFiltered)
+    }
+  } catch (error) {
+
+  }
+
+
+}
+
+
+function setupAbly() {
+  ably = new Ably.Realtime(dataStore.ably.APIKEY);
+
+  ably.connection.on('connected', () => {
+    //TODO: HVad hvis vi ikke kan forbinde til ably?
+    console.log("Ably connected");
+
+
+    const channel = ably.channels.get(channelId);
+
+    channel.subscribe(deviceId, (message) => {
+      console.log(`Received a greeting message in realtime: ${JSON.stringify(message.data)}`);
+      $("#gmTemperature").gaugeMeter({
+        percent: message.data.temperature
+      });
+
+      $("#gmHumidity").gaugeMeter({
+        percent: message.data.humidity
+      });
+
+      //update timestamp
+      //format timestamp to nordic format
+      var date = new Date(message.data.timeStamp);
+      var day = date.getDate();
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var seconds = date.getSeconds();
+      var nordicDate = day + "-" + month + "-" + year + " " + hours + ":" + minutes + ":" + seconds;
+      $("#timeStamp").html(nordicDate);
+
     });
+
+  });
+
+
+
+
+
 }
 
 function generateShortGuid() {
@@ -57,7 +105,7 @@ function generateShortGuid() {
     https://github.com/mebjas/html5-qrcode
 
 */
-function sqanDevice() {
+function scanDevice() {
   Html5Qrcode.getCameras().then(devices => {
 
     //Start scanning
@@ -124,17 +172,21 @@ function loadConfiguration() {
     //Create new default config
     dataStore = {
       devices: [
-        { id: generateShortGuid(), name: "bob1", description: "bob1's device", category: "animal", type: "cat", alarms: [] },
+        { id: generateShortGuid(), name: "bentley", description: "illy mess. 1", category: "", type: "", alarms: [] },
         { id: generateShortGuid(), name: "bob2", description: "bob2's device", category: "animal", type: "cat", alarms: [] },
         { id: generateShortGuid(), name: "bob3", description: "bob3's device", category: "animal", type: "cat", alarms: [] },
       ],
       user: {
         phone: "26190720"
+      },
+      ably: {
+        channelId: 'f1e82afb-f24e-46ae-af7d-14b70afe4e8c',
+        APIKEY: 'xyojOQ.rayVcQ:S0AJDREybgNnOC3kzGJLKxzZo6DBgoCU_6WMhhjRtjk' //Security breach
       }
     }
     saveConfiguration()
   }
-  console.log(JSON.stringify(dataStore))
+  console.log(JSON.stringify(dataStore, 0, 4))
 }
 
 function saveConfiguration() {

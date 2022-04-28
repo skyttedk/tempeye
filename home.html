@@ -100,9 +100,7 @@
             const channel = ably.channels.get(channelId);
 
             channel.subscribe(deviceId, (message) => {
-
                 console.log(`Received a greeting message in realtime: ${JSON.stringify(message.data)}`);
-
                 $("#gmTemperature").gaugeMeter({
                     percent: message.data.temperature
                 });
@@ -121,8 +119,8 @@
                 var minutes = date.getMinutes();
                 var seconds = date.getSeconds();
                 var nordicDate = day + "-" + month + "-" + year + " " + hours + ":" + minutes + ":" + seconds;
-
                 $("#timeStamp").html(nordicDate);
+
             });
 
         });
@@ -131,11 +129,7 @@
 
         //Setup
         $(document).ready(function() {
-
             loadConfiguration();
-
-
-
             $(".GaugeMeter").gaugeMeter({
                 percent: 0
             });
