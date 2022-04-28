@@ -125,9 +125,17 @@
              * { id: "id", label: "label" }
              */
             //loop devices
-            devices.forEach(device => {
-                alert(console.log(device.label));
-            })
+
+
+
+            for (const device of devices) {
+                //if device is not the default camera
+                alert(device.label);
+                //if (device.label != "Built-in camera") {
+                //set the device as the default camera
+                //  Html5Qrcode.setActiveCamera(device.id);
+                //}
+            }
 
             console.log(devices)
             if (devices && devices.length) {
