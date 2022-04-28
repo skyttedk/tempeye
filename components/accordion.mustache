@@ -1,0 +1,18 @@
+<div data-component="test"></div>
+
+<div class="accordion" id="accordionExample">
+    {{#devices}}
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading_{{name}}">
+            <button class="accordion-button" type="button" data-mdb-toggle="collapse" data-mdb-target="#coll_{{name}}" aria-expanded="false" aria-controls="coll_{{name}}">
+                {{name}}
+        </button>
+        </h2>
+        <div id="coll_{{name}}" class="accordion-collapse collapse " aria-labelledby="heading_{{name}}" data-mdb-parent="#accordionExample">
+            <div class="accordion-body">
+                <strong>{{description}}</strong>
+            </div>
+        </div>
+    </div>
+    {{/devices}}
+</div>

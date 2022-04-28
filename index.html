@@ -10,7 +10,6 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="theme-color" content="#a9a9a9">
     <meta name="description" content="Metering as it was meant to be">
-
     <!-- PWA manifest i-->
     <link rel="manifest" href="manifest.json">
     <!-- MDB icon -->
@@ -23,10 +22,11 @@
     <link rel="stylesheet" href="css/mdb.min.css" />
     <!-- Gauge Meter -->
     <link rel="stylesheet" type="text/css" href="/css/GaugeMeter.css">
-
-
     <!-- Load PWA service worker -->
     <script>
+        let testData = {
+            name: "ass"
+        }
         if (!navigator.serviceWorker.controller) {
             navigator.serviceWorker.register("/sw.js").then(function(reg) {
                 console.log("Service worker has been registered for scope: " + reg.scope);
@@ -37,23 +37,8 @@
 </head>
 
 <body onload="renderApp()">
-    <!-- Start your project here-->
-    <div class="container">
-        <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
 
-            <!-- Mustache body-->
-            <div id="app">Loading...</div>
-            <script id="template" type="text/html">
-
-                <div id="accordion">Loading...</div>
-                <button type="button" onclick="sqanDevice();" class="btn btn-primary btn-rounded   btn-lg" data-mdb-ripple-color="#ffffff">Tilføj enhed <i class="fas fa-download ms-1"></i></button>
-
-            </script>
-
-        </div>
-    </div>
-    </div>
-    <!-- End your project here-->
+    <div id="app" data-component="app"></div>
 
     <!-- MDB -->
     <script type="text/javascript" src="js/mdb.min.js"></script>

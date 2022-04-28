@@ -3,7 +3,18 @@
 
 
 <!-- TODO:
-      vise tidsstempel på måling
+
+
+    UI: https://mdbootstrap.com/snippets/  <<<-- aaawsame!!
+
+    //Install
+
+    https://javascript.plainenglish.io/creating-a-browser-agnostic-pwa-install-button-41039f312fbe
+
+    hvis flere devices.. skal vises en liste over deres navn og id
+
+
+      vise tidsstempel på måling - ok
       hvis måling er meren end xx min gammel. skal der vises -- i metrene
       implementer temperatuer skalaer som jeg fandt
 
@@ -11,6 +22,7 @@
          kunne vi skanne en qr kode for at få en device id?
          skal kunne slette device
          skal kune vise flere devices... in the future...
+            måske en accodrion : https://mdbootstrap.com/docs/standard/components/accordion/
 
       setup menu...
         opsætnings menu, hvor man ændre infstillinger
@@ -119,6 +131,11 @@
 
         //Setup
         $(document).ready(function() {
+
+            loadConfiguration();
+
+
+
             $(".GaugeMeter").gaugeMeter({
                 percent: 0
             });
@@ -145,6 +162,9 @@
 <div class="GaugeMeter" id="gmHumidity" data-width="10" data-size="200" data-append="&#176;" data-label_color="#FFFFFF" data-label="Humidity" data-theme="Green-Red" data-style="Semi" data-back="RGBa(0,0,0,.6)"></div>
 -->
 
+<button id="btnScan" onclick="sqanDevice();">Scan QR Code</button>
+
+<button type="button" class="btn btn-primary btn-rounded   btn-lg" data-mdb-ripple-color="#ffffff"> Tilføj enhed <i class="fas fa-download ms-1"></i></button>
 
 
 </html>
