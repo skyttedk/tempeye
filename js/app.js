@@ -31,6 +31,7 @@ async function renderComponent(path, target) {
     elements = Array.from(elements)
 
     let componentName = path.split("/")[1].split(".")[0]
+    console.log("Rendering component:" + componentName)
 
     componentsFiltered = elements.filter(function(element) {
       return element.getAttribute("data-component") != componentName
@@ -164,13 +165,21 @@ function scanDevice() {
      
  */
 
-localStorage.removeItem("dataStore")
+
+function loadPage(page) {
+
+  dataStore.page = page;
+  saveConfiguration();
+  location.reload();
+}
+//localStorage.removeItem("dataStore")
 
 function loadConfiguration() {
   dataStore = JSON.parse(localStorage.getItem("dataStore"))
   if (dataStore == null) {
     //Create new default config
     dataStore = {
+      page: 'page.main',
       devices: [
         { id: generateShortGuid(), name: "bentley", description: "illy mess. 1", category: "", type: "", alarms: [] },
         { id: generateShortGuid(), name: "bob2", description: "bob2's device", category: "animal", type: "cat", alarms: [] },

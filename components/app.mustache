@@ -1,12 +1,7 @@
-<div class="container">
+<div class="container-fluid">
+    <div data-component="nav.bar"></div>
     <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
-
-        <button type="button" onclick="scanDevice();" class="btn btn-primary btn-rounded btn-lg" data-mdb-ripple-color="#ffffff">Tilføj enhed <i class="fas fa-download ms-1"></i></button>
-
-        <div data-component="device.list"></div>
-        <div data-component="gauge"></div>
-        <div data-component_="test"></div>
-
+         <div id="view" data-component="{{page}}"></div>
     </div>
 </div>
 </div>
