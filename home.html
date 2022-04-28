@@ -43,14 +43,9 @@
     https://pngtree.com/freepng/dog-care-silhouette-head-healthy-pet-mono-line-logo-design_4996067.html
 
 
-    noget fra heroku
-    https://elements.heroku.com/addons/cloudmqtt
-    https://devcenter.heroku.com/articles/cloudmqtt
-
-    //demo example https://www.emqx.com/en/blog/how-to-use-mqtt-in-nodejs
-    
-    //panel
-    https://api.cloudmqtt.com/console/82665378/details
+    //QR
+    https://blog.minhazav.dev/research/html5-qrcode.html
+    https://github.com/mebjas/html5-qrcode
 
 -->
 
@@ -63,6 +58,7 @@
     <meta name="theme-color" content="#a9a9a9">
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="js/html5-qrcode.min.js"></script>
     <script type="text/javascript" src="/js/GaugeMeter.js"></script>
     <script src="https://cdn.ably.com/lib/ably.min-1.js"></script>
 
@@ -122,6 +118,39 @@
         });
 
 
+        // This method will trigger user permissions
+        Html5Qrcode.getCameras().then(devices => {
+            /**
+             * devices would be an array of objects of type:
+             * { id: "id", label: "label" }
+             */
+            //loop devices
+            devices.forEach(device => {
+                alert(console.log(device.label));
+            })
+
+            console.log(devices)
+            if (devices && devices.length) {
+                var cameraId = devices[0].id;
+                // .. use this to start scanning.
+            }
+        }).catch(err => {
+            // handle err
+        });
+
+        function scanQr() {
+            var html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+                fps: 10,
+                qrbox: 250
+            });
+            html5QrcodeScanner.render(onScanSuccess);
+        }
+
+        function onScanSuccess(decodedText, decodedResult) {
+            // Handle on success condition with the decoded text or result.
+            console.log(`Scan result: ${decodedText}`, decodedResult);
+        }
+
 
         //Setup
         $(document).ready(function() {
@@ -134,6 +163,9 @@
 </head>
 
 <body style="background-color: #3F76AA"></body>
+
+<!-- QR Code scanner -->
+<div style="width: 500px" id="reader"></div>
 
 <div style="color: RGBa(200, 200, 240, .8)" id="timeStamp"></div>
 
