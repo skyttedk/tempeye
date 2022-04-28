@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- TODO: Migrate home.html to this page-->
+
+<head>
+    <title>TempEye</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="theme-color" content="#a9a9a9">
+    <meta name="description" content="Metering as it was meant to be">
+
+    <!-- PWA manifest i-->
+    <link rel="manifest" href="manifest.json">
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <!-- Gauge Meter -->
+    <link rel="stylesheet" type="text/css" href="/css/GaugeMeter.css">
+
+
+    <!-- Load PWA service worker -->
+    <script>
+        if (!navigator.serviceWorker.controller) {
+            navigator.serviceWorker.register("/sw.js").then(function(reg) {
+                console.log("Service worker has been registered for scope: " + reg.scope);
+            });
+        }
+    </script>
+
+</head>
+
+<body onload="renderApp()">
+    <!-- Start your project here-->
+    <div class="container">
+        <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+
+            <!-- Mustache body-->
+            <div id="app">Loading...</div>
+            <script id="template" type="text/html">
+
+                <div id="accordion">Loading...</div>
+                <button type="button" onclick="sqanDevice();" class="btn btn-primary btn-rounded   btn-lg" data-mdb-ripple-color="#ffffff">Tilføj enhed <i class="fas fa-download ms-1"></i></button>
+
+            </script>
+
+        </div>
+    </div>
+    </div>
+    <!-- End your project here-->
+
+    <!-- MDB -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- QR Code -->
+    <script type="text/javascript" src="js/html5-qrcode.min.js"></script>
+    <!-- Gauge Meter -->
+    <script type="text/javascript" src="/js/GaugeMeter.js"></script>
+    <!-- Ably-->
+    <script src="https://cdn.ably.com/lib/ably.min-1.js"></script>
+    <!-- Mustache-->
+    <script src="https://unpkg.com/mustache@latest"></script>
+    <!-- Main App -->
+    <script type="text/javascript" src="/js/app.js"></script>
+</body>
+
+</html>
