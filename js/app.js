@@ -172,7 +172,7 @@ function loadPage(page) {
   saveConfiguration();
   location.reload();
 }
-//localStorage.removeItem("dataStore")
+localStorage.removeItem("dataStore")
 
 function loadConfiguration() {
   dataStore = JSON.parse(localStorage.getItem("dataStore"))
