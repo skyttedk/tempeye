@@ -9,9 +9,6 @@
 */
 Html5Qrcode.getCameras().then(devices => {
 
-
-
-
   //Start scanning
   const html5QrCode = new Html5Qrcode("reader");
   html5QrCode.start({ facingMode: "environment" }, {
@@ -23,7 +20,15 @@ Html5Qrcode.getCameras().then(devices => {
       },
       (decodedText, decodedResult) => {
         // do something when code is read
-        alert(decodedText)
+        //do stuff
+
+        html5QrCode.stop().then((ignore) => {
+          // QR Code scanning is stopped.
+        }).catch((err) => {
+          // Stop failed, handle it.
+        });
+
+
       },
       (errorMessage) => {})
     .catch((err) => {});
