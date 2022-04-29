@@ -6,14 +6,14 @@
 function renderApp() {
   loadConfiguration();
   setupAbly();
-  renderComponents(Array.from($("[data-component]")))
+  renderComponents(Array.from($("[component]")))
 }
 
 function renderComponents(elements) {
   for (element of elements) {
     element.id = generateShortGuid()
     let attributes = namedNodemapToObject(element.attributes);
-    let template = "components/" + element.getAttribute("data-component") + ".mustache"
+    let template = "components/" + element.getAttribute("component") + ".mustache"
     renderComponent(template, element, attributes)
   }
 }
@@ -32,7 +32,7 @@ async function renderComponent(path, target, attributes) {
     $(target).html(rendered)
 
     // check if we have nested components!!
-    let elements = $(`#${target.id} [data-component]`)
+    let elements = $(`#${target.id} [component]`)
     elements = Array.from(elements)
 
     let componentName = path.split("/")[1].split(".")[0]
@@ -40,7 +40,7 @@ async function renderComponent(path, target, attributes) {
       console.log("Rendering component:" + componentName)
 
     componentsFiltered = elements.filter(function(element) {
-      return element.getAttribute("data-component") != componentName
+      return element.getAttribute("component") != componentName
     })
     if (componentsFiltered.length > 0) {
       renderComponents(componentsFiltered)
