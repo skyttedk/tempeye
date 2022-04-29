@@ -44,12 +44,21 @@
             });
         }
     </script>
-
+    <style>
+        #root {
+            -ms-overflow-style: none;
+            overflow: -moz-scrollbars-none;
+        }
+        
+        #root::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 </head>
 
 <body onload="renderApp();" style="background-color: #3F76AA">
 
-    <div data-component="app" name="Snooby"></div>
+    <div id="root" data-component="app" name="Snooby"></div>
 
     <!-- MDB -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
