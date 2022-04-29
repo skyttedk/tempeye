@@ -1,8 +1,22 @@
 
-   <h1 class="mb-3">Settings</h1>
+   <h1 class="pb-5">Indstillinger</h1>
 
-   <div component="input.phone" label="bob" value="ass"></div>
-   <div component="input.text" label="bob" value="ass"></div>t
+
+
+   <form class="row g-5 needs-validation" novalidate>
+
+     <div component="input.text" label="Telefonnr." value=""></div>
+     <div component="input.text" label="Brugernavn" value=""></div>
+
+   <div class="d-grid  d-md-block ">
+      <div component="button.primary" label="Gem" onclick="saveConfiguration();"></div>
+   </div>
+
+
+</form>
+
+
+
 
 <!--  
    <button type="button" onclick="scanDevice();" class="btn btn-primary btn-rounded btn-lg" data-mdb-ripple-color="#ffffff">Tilføj enhed <i class="fas fa-download ms-1"></i></button>

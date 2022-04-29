@@ -11,7 +11,7 @@ function renderApp() {
 
 function renderComponents(elements) {
   for (element of elements) {
-    element.id = generateShortGuid()
+
     let attributes = namedNodemapToObject(element.attributes);
     let template = "components/" + element.getAttribute("component") + ".mustache"
     renderComponent(template, element, attributes)
@@ -35,13 +35,8 @@ async function renderComponent(path, target, attributes) {
     let rendered = Mustache.render(templateString, dataStoreCopy);
 
 
-    $(target).html(rendered)
-
-    // check if we have nested components!!
-    let elements = $(`#${target.id} [component]`)
-    elements = Array.from(elements)
-
-
+    $(target).replaceWith(rendered)
+    let elements = Array.from($("[component]"))
 
     componentsFiltered = elements.filter(function(element) {
       return element.getAttribute("component") != componentName
@@ -49,6 +44,7 @@ async function renderComponent(path, target, attributes) {
     if (componentsFiltered.length > 0) {
       renderComponents(componentsFiltered)
     }
+
   } catch (error) {
 
   }
