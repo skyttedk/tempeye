@@ -1,0 +1,11 @@
+TODO:
+
+
+ANDRETIGN:
+skulle vi injecte mustache component name i attributes på elementer,, så vi kan se hvor en std. komponent kommer fra
+hvis der er noget som skal rettes.
+
+Eks. lige nu er der en tekst, som vises, og jeg ved ikke hvor den kommer fra.
+
+
+

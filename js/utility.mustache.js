@@ -28,16 +28,20 @@ async function renderComponent(path, target, attributes) {
       dataStoreCopy[key] = attributes[key]
     }
 
+    let componentName = path.split("/")[1].split(".")[0]
+    if (debugging == true)
+      console.log("Rendering component:" + componentName)
+
     let rendered = Mustache.render(templateString, dataStoreCopy);
+
+
     $(target).html(rendered)
 
     // check if we have nested components!!
     let elements = $(`#${target.id} [component]`)
     elements = Array.from(elements)
 
-    let componentName = path.split("/")[1].split(".")[0]
-    if (debugging == true)
-      console.log("Rendering component:" + componentName)
+
 
     componentsFiltered = elements.filter(function(element) {
       return element.getAttribute("component") != componentName
