@@ -1,0 +1,20 @@
+<div id="{{id}}" class="alert alert-success mt-5" role="alert" style="display:none">
+  <h4 class="alert-heading">{{heading}}</h4>
+  <p>{{message}}</p>
+</div>
+
+<script>
+
+function displayAlert(id) {
+  $(`#success`).show();
+  startTimer();
+}
+
+function startTimer() {
+    if({{timeout}}) {
+        setTimeout(function(){
+            $('#{{id}}').fadeOut();
+        }, {{timeout}});
+    }
+}
+</script>

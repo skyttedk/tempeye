@@ -16,7 +16,8 @@ function loadConfiguration() {
         { id: generateShortGuid(), name: "bob3", description: "bob3's device", category: "animal", type: "cat", alarms: [] },
       ],
       user: {
-        phone: "26190720"
+        phone: "26190720",
+        name: "Bob",
       },
       ably: {
         channelId: 'f1e82afb-f24e-46ae-af7d-14b70afe4e8c',

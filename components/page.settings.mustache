@@ -1,20 +1,23 @@
-
-   <h1 class="pb-5">Indstillinger</h1>
-
-
-
-   <form class="row g-5 needs-validation" novalidate>
-
-     <div component="input.text" label="Telefonnr." value=""></div>
-     <div component="input.text" label="Brugernavn" value=""></div>
-
+<h1 class="pb-5">Indstillinger</h1>
+  <form class="row g-5 needs-validation" novalidate>
+     <div id="phone" component="input.text" label="Telefonnr." value="{{user.phone}}"></div>
+     <div id="name" component="input.text" label="Brugernavn" value="{{user.name}}"></div>
+     
    <div class="d-grid  d-md-block ">
-      <div component="button.primary" label="Gem" onclick="saveConfiguration();"></div>
+      <div component="button.primary" label="Gem" onclick="save();"></div>
    </div>
-
-
 </form>
 
+<div id="success" component="alert" heading="Success!" message="Indstillingerne blev gemt" timeout="2000">
+
+<script>
+function save() {
+   dataStore.user.phone = $(`#phone`).find(`input`).val();
+   dataStore.user.name = $(`#name`).find(`input`).val();
+   saveConfiguration();
+   displayAlert(`success`);
+}
+</script>
 
 
 

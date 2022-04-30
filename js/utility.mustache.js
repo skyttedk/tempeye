@@ -27,12 +27,17 @@ async function renderComponent(path, target, attributes) {
     for (let key in attributes) {
       dataStoreCopy[key] = attributes[key]
     }
+    //add guid to dataStoreCopy, if no id defined on parent element
+    if (!target.id) {
+      dataStoreCopy['id'] = generateShortGuid()
+    }
 
     let componentName = path.split("/")[1].split(".")[0]
     if (debugging == true)
       console.log("Rendering component:" + componentName)
 
     let rendered = Mustache.render(templateString, dataStoreCopy);
+
 
 
     $(target).replaceWith(rendered)
