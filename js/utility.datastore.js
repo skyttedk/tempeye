@@ -4,6 +4,7 @@ function deleteConfiguration() {
   localStorage.removeItem("dataStore")
 }
 
+
 function loadConfiguration() {
   dataStore = JSON.parse(localStorage.getItem("dataStore"))
   if (dataStore == null) {
@@ -11,13 +12,15 @@ function loadConfiguration() {
     dataStore = {
       page: 'page.main',
       devices: [
-        { id: generateShortGuid(), name: "bentley", description: "illy mess. 1", category: "", type: "", alarms: [] },
-        { id: generateShortGuid(), name: "bob2", description: "bob2's device", category: "animal", type: "cat", alarms: [] },
-        { id: generateShortGuid(), name: "bob3", description: "bob3's device", category: "animal", type: "cat", alarms: [] },
+        { id: generateShortGuid(), name: "device_1", description: "Device 1", category: "", type: "", alarms: [] },
+        { id: generateShortGuid(), name: "device_2", description: "Device 2", category: "", type: "cat", alarms: [] },
+        { id: generateShortGuid(), name: "device_3", description: "Device 3", category: "", type: "cat", alarms: [] },
       ],
       user: {
-        phone: "26190720",
-        name: "Bob",
+        phone: "",
+        email: "",
+        receiveSms: false,
+        receiveEmail: false,
       },
       ably: {
         channelId: 'f1e82afb-f24e-46ae-af7d-14b70afe4e8c',

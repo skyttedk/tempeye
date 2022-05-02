@@ -1,8 +1,10 @@
-<h1 class="pb-5">Indstillinger</h1>
+<h5 class="pb-5">Indstillinger</h5>
   <form class="row g-5 needs-validation" novalidate>
      <div id="phone" component="input.text" label="Telefonnr." value="{{user.phone}}"></div>
-     <div id="name" component="input.text" label="Brugernavn" value="{{user.name}}"></div>
-     
+     <div id="receiveSms" component="input.switch" label="Modtag SMS advarsler" value="{{user.receiveSms}}"></div>
+     <div id="email" component="input.text" label="Email" value="{{user.email}}"></div>
+     <div id="receiveEmail" component="input.switch" label="Modtag Email advarsler" value="{{user.receiveEmail}}"></div>
+
    <div class="d-grid  d-md-block ">
       <div component="button.primary" label="Gem" onclick="save();"></div>
    </div>
@@ -13,7 +15,10 @@
 <script>
 function save() {
    dataStore.user.phone = $(`#phone`).find(`input`).val();
-   dataStore.user.name = $(`#name`).find(`input`).val();
+   dataStore.user.email = $(`#email`).find(`input`).val();
+   dataStore.user.receiveSms = $(`#receiveSms`).find(`input`).is(`:checked`);
+   dataStore.user.receiveEmail = $(`#receiveEmail`).find(`input`).is(`:checked`);
+   console.log(JSON.stringify(dataStore.user,0,4));
    saveConfiguration();
    displayAlert(`success`);
 }
