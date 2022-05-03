@@ -5,7 +5,7 @@
  */
 function renderApp() {
   loadConfiguration();
-  console.log(JSON.stringify(dataStore, 0, 4));
+  //console.log(JSON.stringify(dataStore, 0, 4));
   setupAbly();
   renderComponents(Array.from($("[component]")))
 }

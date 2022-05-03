@@ -1,11 +1,69 @@
 TODO:
 
 
-ANDRETIGN:
-skulle vi injecte mustache component name i attributes på elementer,, så vi kan se hvor en std. komponent kommer fra
-hvis der er noget som skal rettes.
 
-Eks. lige nu er der en tekst, som vises, og jeg ved ikke hvor den kommer fra.
+
+Ikon på app skal ikke være en hund. Det kan man sætte op på profiler.
+
+
+  device
+
+     id
+     navn
+     profile
+
+    
+
+     alarmer: [] <-kopier alarmer fra standard profil over.
+
+
+   modifies: [
+       name:value
+       obese: +1
+       puppy: +2
+       age:
+   ]
+   temperatureRanges : {
+       startTemp: 22,
+       endTemp : 36,
+       value : comfortable
+       enableSMSalert : true,
+       enableEmailAler : false,
+       enablePhoneShake: true
+
+   } , {
+       startTemp : 26,
+       endTemp: 30,
+       value : uncomfortable
+   }
+
+
+    humidityRangesRanges : {
+
+    }
+
+
+
+
+  Standard Profiler.
+
+  Name:
+  Icon:
+  temperatureTable : []
+  alerts : []
+  
+ 
+
+
+
+
+Small dog.
+medium dog.
+big dog.
+wine cellar
+
+
+
 
 
 

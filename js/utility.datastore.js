@@ -1,9 +1,10 @@
 let dataStore = null
 
+
+
 function deleteConfiguration() {
   localStorage.removeItem("dataStore")
 }
-
 
 function loadConfiguration() {
   dataStore = JSON.parse(localStorage.getItem("dataStore"))
@@ -12,9 +13,7 @@ function loadConfiguration() {
     dataStore = {
       page: 'page.main',
       devices: [
-        { id: generateShortGuid(), name: "device_1", description: "Device 1", category: "", type: "", alarms: [] },
-        { id: generateShortGuid(), name: "device_2", description: "Device 2", category: "", type: "cat", alarms: [] },
-        { id: generateShortGuid(), name: "device_3", description: "Device 3", category: "", type: "cat", alarms: [] },
+        { id: generateShortGuid(), name: "device_1", description: "Device 1", category: "", type: "", alarms: [] }
       ],
       user: {
         phone: "",

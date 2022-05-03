@@ -1,7 +1,28 @@
-<div  id="{{id}}" class="GaugeMeter" data-width="10" data-size="200" data-append="&#176;" data-label_color="#FFFFFF" data-label="{{label}}" data-theme="Green-Red" data-style="Semi" data-back="RGBa(0,0,0,.6)"></div>
+<div  id="{{prefix}}{{id}}" class="GaugeMeter" data-width="10" data-size="200" data-append="&#176;" data-label_color="#FFFFFF" data-label="{{label}}" data-theme="Green-Red" data-style="Semi" data-back="RGBa(0,0,0,.6)"></div>
 
 <script>
-  $(".GaugeMeter").gaugeMeter({
-                percent: 0
-            });
+  let gaugeId = "{{prefix}}{{id}}";
+
+  $(`#${gaugeId}`).gaugeMeter({percent: 0});
+
+  const channel = ably.channels.get(mainChannel);
+
+  channel.subscribe('{{id}}', (message) => {
+
+     {{#temperature}}
+      $(`#${gaugeId}`).gaugeMeter({
+        percent: message.data.temperature
+      });
+      {{/temperature}}
+
+      {{#humidity}}
+      $(`#${gaugeId}`).gaugeMeter({
+        percent: message.data.humidity
+      });
+      {{/humidity}}
+   
+  
+    });
+
+
 </script>

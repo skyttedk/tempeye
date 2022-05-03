@@ -1,7 +1,9 @@
+<div id="{{id}}" class="accordion mb-8" >
+
 {{#devices}}
 
-<div id="{{id}}" class="accordion" >
-  <div class="accordion-item">
+
+  <div class="accordion-item mb-4">
     <h2 class="accordion-header" id="heading{{id}}">
       <button
         class="accordion-button collapsed"
@@ -10,44 +12,66 @@
         data-mdb-target="#collapse{{id}}"
         aria-expanded="false"
         aria-controls="collapse{{id}}">
-      {{id}}
+      <h4 class="mt-1">{{description}}</h4>
       </button>
     </h2>
     <div id="collapse{{id}}" class="accordion-collapse collapse show" aria-labelledby="heading{{id}}" data-mdb-parent="#accordionExample">
       <div class="accordion-body">
-        <strong>{{description}}</strong>
 
+      
+      <!-- Description  & Settings button -->
+      <div class="row">
+          <div class="col-6">
+          <!-- Timestamp-->
+            <div id="ts_{{id}}" style="font-size:small" class="text-muted">Sidst opdateret: 23:55</div>
+          </div>
 
+          <div class="col-4">
+            <div style="font-size:small" class="text-muted">(02/05/2022)</div>
+          </div>
 
+          <div class="col-2">
+          <!-- Ssettings-->
+            <button type="button"  onclick="loadPage('page.device.settings');" deviceId={{id}} class="btn btn-dark btn-floating float-end mt-n2 shadow-0" style="background-color:#424242">
+              <i class="fas fa-ellipsis-v fa-2x"></i>
+            </button>
+
+          </div>    
+      </div>
+
+      <!-- Gauges-->
         <div class="d-flex align-items-start bg-darkj mb-3" style="height: 100px;">
           <div class="col-4">
-              <div component="gauge" label="Temperature"></div>
+              <div id="{{id}}" component="gauge" temperature="1" prefix="t_" label="Temperature"></div>
           </div>
           <div class="col-4">
-            <div component="gauge" label="humidity"></div>
+             <div id="{{id}}" component="gauge" humidity="1" prefix="h_" label="humidity"></div>
           </div>
         </div>
-
 
         <br><br>
         
-        
-        
-        <div class="row">
-          <div class="col-6">
-          <div style="font-size:small" class="text-muted">Sidst opdateret: 23:55</div>
-            
-          </div>
-          <div class="col-6">
-          <div style="font-size:small" class="text-muted">(02/05/2022)</div>
-          <br>
-          <div component="button.link" label="Indstillinger" deviceId={{id}} onclick="loadPage('page.device.settings');"></div>
-          </div>
-        </div>
+        <!-- Timestamp script-->
+            <script>
+               const channel2 = ably.channels.get(mainChannel);
+               channel.subscribe('{{id}}', (message) => {
+                  document.getElementById("ts_{{id}}").innerHTML = "Sidst opdateret: " + message.timestamp;
+                  //skal generelt passe på med navngivning af varible ind i en loop, da de bliver ens!!
+                  const nordicDate = toNordicTimeStamp(message.data.timeStamp)
+                   $("#ts_{{id}}").html(nordicDate);
+               });
+              </script>
+      
       </div> 
     </div>
   </div>
 
 {{/devices}} 
 
+</div>
+<div class="text-center text-white-50">
+  <button type="button"  onclick="loadPage('page.device.add');" class="btn btn-primary btn-floating mb-3">
+    <i class="fas fa-plus fa-2x"></i>
+  </button>
+  <div>Tilføj en ny enhed</div>
 </div>
